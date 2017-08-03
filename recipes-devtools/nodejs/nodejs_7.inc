@@ -39,7 +39,7 @@ PACKAGECONFIG ??= "zlib openssl"
 
 PACKAGECONFIG[zlib] = "--shared-zlib,,zlib,"
 PACKAGECONFIG[openssl] = "--shared-openssl,,openssl,"
-PACKAGECONFIG[v8-inspector] = ",--without-inspector,,"
+PACKAGECONFIG[v8-inspector] = "--with-intl=small-icu,--without-inspector --with-intl=none,,"
 
 DISABLE_STATIC = ""
 
@@ -53,7 +53,6 @@ do_configure () {
   ./configure	--prefix="${prefix}" \
 		--dest-cpu="${@nodejs_map_dest_cpu(d.getVar('TARGET_ARCH', True), d)}" \
 		--dest-os=linux ${ARCHFLAGS} \
-		--with-intl=none \
 		${CROSSCONF} \
 		${PACKAGECONFIG_CONFARGS}
 }
